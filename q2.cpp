@@ -11,7 +11,7 @@
 
 int customFunction() {
     int result = 0;
-    for (int i = 0; i < 1000000; i++) {
+    for (int i = 0; i < 1000; i++) {
         result += i;
     }
     return result;
@@ -36,7 +36,7 @@ double MeasureSystemCallTime(int numIterations) {
 }
 
 int main() {
-    int numIterations = 1000000;
+    int numIterations = 10000;
     double functionCallTime = MeasureFunctionCallTime(numIterations);
     double systemCallTime = MeasureSystemCallTime(numIterations);
     std::cout << "Function call time: " << functionCallTime << std::endl;
