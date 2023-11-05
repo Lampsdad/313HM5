@@ -32,3 +32,6 @@ int main()
 
     return 0;
 }
+
+
+//TEST WITH THE ulimit -n command

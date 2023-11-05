@@ -27,6 +27,13 @@ int main()
         return 1;
     }
 
+    int pipefd[2];
+    if (pipe(pipefd) == -1)
+    {
+        perror("pipe");
+        return 1;
+    }
+
     pid_t pid = fork();
     if (pid == -1)
     {
@@ -38,7 +45,11 @@ int main()
     {
         // child
         char buf[1024];
-        ssize_t bytes_read = read(fd, buf, sizeof(buf));
+        close(pipefd[1]);                  // close the write end of the pipe
+        read(pipefd[0], buf, sizeof(buf)); // read the synchronization message
+        close(pipefd[0]);                  // close the read end of the pipe
+
+        size_t bytes_read = read(fd, buf, sizeof(buf));
         if (bytes_read == -1)
         {
             perror("read");
@@ -62,29 +73,15 @@ int main()
             return 1;
         }
 
-        if (close(fd) == -1)
-        {
-            perror("close");
-            return 1;
-        }
-
         if (system("ls -l test.txt") == -1)
         {
             perror("system");
             return 1;
         }
 
-        if (write(fd, "hello", 5) == -1)
-        {
-            perror("write");
-            return 1;
-        }
-
-        if (close(fd) == -1)
-        {
-            perror("close");
-            return 1;
-        }
+        close(pipefd[0]);            // close the read end of the pipe
+        write(pipefd[1], "sync", 4); // write the synchronization message
+        close(pipefd[1]);            // close the write end of the pipe
     }
 
     return 0;
