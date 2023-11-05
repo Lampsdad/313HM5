@@ -86,6 +86,9 @@ int main(int argc, char *argv[])
         std::cout << "-";
     }
 
+    // print out the owner of the file
+    std::cout << "Owner: " << buf.st_uid << std::endl;
+
     std::cout << std::endl;
 
     return 0;
