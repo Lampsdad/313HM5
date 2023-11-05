@@ -36,7 +36,7 @@ double MeasureSystemCallTime(int numIterations) {
 }
 
 int main() {
-    int numIterations = 10000;
+    int numIterations = 20000;
     double functionCallTime = MeasureFunctionCallTime(numIterations);
     double systemCallTime = MeasureSystemCallTime(numIterations);
     std::cout << "Function call time: " << functionCallTime << std::endl;
