@@ -25,6 +25,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    if (fileDescriptor == -2)
+    {
+        perror("File does not exist");
+        return 1;
+    }
+
     char buffer[1024];
     int bytesRead;
 

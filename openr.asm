@@ -20,5 +20,5 @@ openr:
 
     syscall
 
-    pop rbp
+    ;pop rbp
     ret
