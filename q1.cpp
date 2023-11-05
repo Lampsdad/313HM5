@@ -1,11 +1,8 @@
 #include <iostream>
-#include <string>
-#include <fstream>
+#include <cstring>
+#include <unistd.h> // For write function
 
-extern "C"
-{
-    int openr(const char *pathname);
-}
+extern "C" int openr(const char *pathname); // Declare the external assembly function
 
 int main(int argc, char *argv[])
 {
@@ -16,13 +13,24 @@ int main(int argc, char *argv[])
     }
 
     const char *pathname = argv[1];
-    int result = openr(pathname);
 
-    if (result == -1)
+    int fileDescriptor = openr(pathname); // Call the assembly function
+
+    if (fileDescriptor == -1)
     {
-        perror("openr");
+        std::cerr << "Failed to open file " << pathname << std::endl;
         return 1;
     }
+
+    char buffer[1024];
+    int bytesRead;
+
+    while ((bytesRead = read(fileDescriptor, buffer, sizeof(buffer))) > 0)
+    {
+        write(STDOUT_FILENO, buffer, bytesRead); // Write the contents to stdout
+    }
+
+    close(fileDescriptor); // Close the file when done
 
     return 0;
 }
