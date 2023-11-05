@@ -1,8 +1,8 @@
-# Write a program to determine the maximum number of open files permitted by a process in your operating system.
-# Repeatedly open a file until the open call results in an EMFILE error. Report the maximum number of files that
-# were opened successfully.
+// Write a program to determine the maximum number of open files permitted by a process in your operating system.
+// Repeatedly open a file until the open call results in an EMFILE error. Report the maximum number of files that
+// were opened successfully.
 
-# Solution:
+// Solution:
 
 #include <iostream>
 
