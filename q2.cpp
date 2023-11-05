@@ -23,7 +23,7 @@ double MeasureFunctionCallTime(int numIterations) {
         customFunction();
     }
     clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    return ((double)(end - start) / CLOCKS_PER_SEC / numIterations);
 }
 
 double MeasureSystemCallTime(int numIterations) {
@@ -32,7 +32,7 @@ double MeasureSystemCallTime(int numIterations) {
         getpid();
     }
     clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    return ((double)(end - start) / CLOCKS_PER_SEC) / numIterations;
 }
 
 int main() {
