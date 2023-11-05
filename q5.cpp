@@ -13,7 +13,7 @@ int main()
 
     while (true)
     {
-        fd = open("/dev/null", O_RDONLY);
+        fd = open("m.txt", 0);
         if (fd == -1)
         {
             perror("open");
@@ -22,9 +22,9 @@ int main()
         else
         {
             max_fd++;
+            cout << "Current Open: " << max_fd << endl;
         }
     }
-
     std::cout << "Maximum number of open files: " << max_fd << std::endl;
 
     return 0;
