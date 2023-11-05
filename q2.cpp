@@ -39,7 +39,7 @@ int main() {
     int numIterations = 20000;
     double functionCallTime = MeasureFunctionCallTime(numIterations);
     double systemCallTime = MeasureSystemCallTime(numIterations);
-    std::cout << "Function call time: " << (functionCallTime * 100) << "NS" << std::endl;
-    std::cout << "System call time: " << (systemCallTime * 100)  << "NS" << std::endl;
+    std::cout << "Function call time: " << (functionCallTime * 1000000) << "Micro Seconds" << std::endl;
+    std::cout << "System call time: " << (systemCallTime * 1000000)  << "Micro Seconds" << std::endl;
     return 0;
 }
