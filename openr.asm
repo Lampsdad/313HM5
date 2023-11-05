@@ -15,7 +15,7 @@ openr:
 
     ; Open the file
     mov rax, SYS_OPEN
-    mov rdi, [rbp + 16]
+    mov rdi, [rbp + 8]
     mov rsi, O_RDONLY
 
     syscall
