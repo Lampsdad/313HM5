@@ -5,6 +5,9 @@
 // Solution:
 
 #include <iostream>
+#include <fstream>
+#include <unistd.h>
+#include <fcntl.h>
 
 int main()
 {
@@ -13,7 +16,7 @@ int main()
 
     while (true)
     {
-        fd = open("m.txt", 0);
+        fd = open("m.txt", O_RDONLY);
         if (fd == -1)
         {
             perror("open");
@@ -22,7 +25,7 @@ int main()
         else
         {
             max_fd++;
-            cout << "Current Open: " << max_fd << endl;
+            std::cout << "Current Open: " << max_fd << std::endl;
         }
     }
     std::cout << "Maximum number of open files: " << max_fd << std::endl;
