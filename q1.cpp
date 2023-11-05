@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <unistd.h> // For write function
+using namespace std;
 
 extern "C" int openr(const char *pathname); // Declare the external assembly function
 
