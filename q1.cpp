@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     }
 
     const char *pathname = argv[1];
+    cout << "Pathname: " << pathname << endl;
 
     int fileDescriptor = openr(pathname); // Call the assembly function
     cout << "File descriptor: " << fileDescriptor << endl;
