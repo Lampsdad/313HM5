@@ -1,45 +1,31 @@
 #include <iostream>
-#include <cstring>
-#include <unistd.h> // For write function
-using namespace std;
+#include <fcntl.h>
+#include <unistd.h>
 
-extern "C" int openr(const char *pathname); // Declare the external assembly function
+extern "C" int openr(const char *pathname);
 
 int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "Usage: " << argv[0] << " <pathname>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <file>\n";
         return 1;
     }
 
-    const char *pathname = argv[1];
-    cout << "Pathname: " << pathname << endl;
-
-    int fileDescriptor = openr(pathname); // Call the assembly function
-    cout << "File descriptor: " << fileDescriptor << endl;
-
-    if (fileDescriptor == -1)
+    int fd = openr(argv[1]);
+    if (fd == -1)
     {
-        std::cerr << "Failed to open file " << pathname << std::endl;
+        perror("openr");
         return 1;
     }
 
-    if (fileDescriptor == -2)
+    char buffer[4096];
+    ssize_t bytes;
+    while ((bytes = read(fd, buffer, sizeof(buffer))) > 0)
     {
-        perror("File does not exist");
-        return 1;
+        write(STDOUT_FILENO, buffer, bytes);
     }
 
-    char buffer[1024];
-    int bytesRead;
-
-    while ((bytesRead = read(fileDescriptor, buffer, sizeof(buffer))) > 0)
-    {
-        write(STDOUT_FILENO, buffer, bytesRead); // Write the contents to stdout
-    }
-
-    close(fileDescriptor); // Close the file when done
-
+    close(fd);
     return 0;
 }

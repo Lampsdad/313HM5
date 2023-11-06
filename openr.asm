@@ -1,24 +1,9 @@
-section .text
 global openr
-
-; Constants for system calls
-SYS_OPEN equ 2
-O_RDONLY equ 0
+section .text
 
 openr:
-    ; Function prologue
-    push rbp
-    mov rbp, rsp
-
-    ; Arguments:
-    ; [rbp + 16] = path
-
-    ; Open the file
-    mov rax, SYS_OPEN
-    mov rdi, [rbp + 8]
-    mov rsi, O_RDONLY
-
-    syscall
-
-    pop rbp
-    ret
+    mov rax, 2      ; system call number for open()
+    mov rdi, rdi    ; file path
+    xor rsi, rsi    ; flags for read only (O_READ or O_RDONLY)
+    syscall         ; make the system call
+    ret             ; return to caller
