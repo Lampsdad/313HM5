@@ -30,3 +30,8 @@ int main(int argc, char *argv[])
     std::cout << std::endl;
     return 0;
 }
+
+
+//TO COMPILE:
+// nasm -f elf64 -o openr.asm -o openr.o
+// g++ q1.cpp openr.o -o Aseembly

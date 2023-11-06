@@ -61,31 +61,32 @@ int main(int argc, char *argv[])
 
     if (buf.st_mode & S_IRUSR)
     {
-        std::cout << "r" << std::endl;
+        std::cout << "r";
     }
     else
     {
-        std::cout << "-" << std::endl;
+        std::cout << "-";
     }
 
     if (buf.st_mode & S_IWUSR)
     {
-        std::cout << "w" << std::endl;
+        std::cout << "w";
     }
     else
     {
-        std::cout << "-" << std::endl;
+        std::cout << "-";
     }
 
     if (buf.st_mode & S_IXUSR)
     {
-        std::cout << "x" << std::endl;
+        std::cout << "x";
     }
     else
     {
-        std::cout << "-" << std::endl;
+        std::cout << "-";
     }
 
+    std::cout << std::endl;
     // print out the owner of the file
     std::cout << "Owner: " << buf.st_uid << std::endl;
 
