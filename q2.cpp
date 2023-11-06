@@ -11,7 +11,7 @@
 
 int customFunction() {
     int result = 0;
-    result += i;
+    result += 1;
     return result;
 }
 
